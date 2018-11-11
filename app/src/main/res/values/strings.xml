@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SONIQ</string>
+    <string name="luisteren">Luisteren</string>
+    <string name="api_hint">API eindpunt (http://example.com/api/</string>
 </resources>
