@@ -24,11 +24,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     dynamicSineWaveView.startAnimation();
-
                     dynamicSineWaveView.setVisibility(View.VISIBLE);
                 } else {
-                    dynamicSineWaveView.stopAnimation();
                     dynamicSineWaveView.setVisibility(View.INVISIBLE);
+                    dynamicSineWaveView.stopAnimation();
                 }
             }
         });
