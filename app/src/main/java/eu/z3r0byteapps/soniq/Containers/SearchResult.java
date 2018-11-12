@@ -1,10 +1,17 @@
 package eu.z3r0byteapps.soniq.Containers;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SearchResult {
+    @SerializedName("confidence")
     private float confidence;
+    @SerializedName("result")
     private String resultString;
+    @SerializedName("song_id")
     private int songId;
+    @SerializedName("success")
     private Boolean success;
+    @SerializedName("time")
     private float time;
     private Song song;
 
