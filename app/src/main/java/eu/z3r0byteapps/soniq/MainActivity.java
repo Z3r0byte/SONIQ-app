@@ -170,11 +170,10 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                     SearchResult result = new Gson().fromJson(HttpPost.post(backendUrl + "/search/data", jsonAudio, search), SearchResult.class);
                     if (resultFound) return;
                     if (result == null) throw new IOException();
-                    Log.d(TAG, "run: result:" + result.toString());
+
                     if (search.getSearchResult() == null || result.getConfidence() > search.getSearchResult().getConfidence()) {
                         search.setSearchResult(result);
                         if (result.getConfidence() > 5) {
-                            Log.d(TAG, "run: Confidence is big enough, skipping to result");
                             resultFound = true;
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -195,8 +194,6 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                             }
                         });
                     }
-                    Log.d(TAG, "run: submitted" + requestsSubmitted);
-                    Log.d(TAG, "run: finished" + requestsFinished);
                     requestsFinished++;
                 }
             }
