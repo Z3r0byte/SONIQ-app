@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">SONIQ</string>
     <string name="luisteren">Luisteren</string>
-    <string name="api_hint">API eindpunt (http://example.com/api/)</string>
+    <string name="api_hint">API eindpunt (http://example.com/api)</string>
+    <string name="fout_initialiseren_microfoon">Fout tijdens initialiseren microfoon</string>
+    <string name="toegang_microfoon_vereist">De app kan niet werken zonder toegang tot de microfoon :(</string>
+    <string name="geen_verbinding">Kon niet verbinden met backend</string>
+    <string name="fout">Fout:</string>
+    <string name="fout_matchen">Fout tijdens matchen</string>
+    <string name="geen_match">Geen match</string>
+    <string name="beste_gok">Beste gok: %s - %s</string>
 </resources>
