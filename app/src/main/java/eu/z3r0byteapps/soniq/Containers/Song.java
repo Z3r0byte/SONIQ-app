@@ -3,7 +3,7 @@ package eu.z3r0byteapps.soniq.Containers;
 import com.google.gson.annotations.SerializedName;
 
 public class Song {
-    @SerializedName("artist")
+    @SerializedName("title")
     private String title;
     @SerializedName("artist")
     private String artist;
