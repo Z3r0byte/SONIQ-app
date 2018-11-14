@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
         titel = findViewById(R.id.titel);
         artist = findViewById(R.id.artiest);
 
+        resultCard.setVisibility(View.INVISIBLE);
+
         listenButton = findViewById(R.id.listen);
         listenButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
             } else {
                 titel.setText(getString(R.string.geen_match));
                 artist.setText(String.format(getString(R.string.beste_gok), search.getSearchResult().getSong().getTitle(), search.getSearchResult().getSong().getArtist()));
+                resultCard.setVisibility(View.VISIBLE);
             }
         }
         dynamicSineWaveView.setVisibility(View.INVISIBLE);
