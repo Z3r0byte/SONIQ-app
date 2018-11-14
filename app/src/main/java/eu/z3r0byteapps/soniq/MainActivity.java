@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
 
     @AskPermission(Manifest.permission.RECORD_AUDIO)
     public void initializeRecording() {
-        int bufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_FLOAT);
+        int bufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
 
         recorderInitialized = audioRecord.getRecordingState() == AudioRecord.STATE_INITIALIZED;
