@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
         requestsSubmitted = 0;
         requestsFinished = 0;
         resultFound = false;
-        search = null;
+        search.setSearchId("");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -202,18 +202,22 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
         });
     }
 
-
     private void matchAudio(short[] recordedAudio) {
         requestsSubmitted++;
         final short[] soundFragment = recordedAudio;
         new Thread(new Runnable() {
             @Override
             public void run() {
+                String searchId = search.getSearchId();
                 String jsonAudio = "{ \"data\": " + new Gson().toJson(soundFragment) + "}";
                 try {
                     SearchResult result = new Gson().fromJson(HttpPost.post(backendUrl + "/search/data", jsonAudio, search), SearchResult.class);
-                    if (resultFound) return;
-                    if (result == null) throw new IOException();
+                    if (resultFound || !searchId.equals(search.getSearchId()))
+                        return; //controleren of resultaat nog actueel en nuttig is
+                    if (result == null) {
+                        resultFound = true;
+                        throw new IOException();
+                    }
 
                     if (search.getSearchResult() == null || result.getConfidence() > search.getSearchResult().getConfidence()) {
                         search.setSearchResult(result);
