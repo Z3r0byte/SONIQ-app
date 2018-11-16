@@ -5,10 +5,14 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +32,7 @@ import eu.z3r0byteapps.soniq.Containers.Search;
 import eu.z3r0byteapps.soniq.Containers.SearchResult;
 import eu.z3r0byteapps.soniq.Networking.HttpGet;
 import eu.z3r0byteapps.soniq.Networking.HttpPost;
+import eu.z3r0byteapps.soniq.Util.ConfigUtil;
 import me.tankery.app.dynamicsinewave.DynamicSineWaveView;
 
 public class MainActivity extends AppCompatActivity implements RuntimePermissionListener {
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
     CardView resultCard;
     TextView titel;
     TextView artist;
+    TextInputLayout apiEditTextLayout;
+    EditText apiEditText;
 
     AudioRecord audioRecord;
     Boolean recorderInitialized = false;
@@ -45,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
 
     Search search = new Search();
 
-    String backendUrl = "http://192.168.1.18:5000";
+    String backendUrl = "";
 
     short[] recordedAudio;
     int requestsSubmitted = 0;
@@ -56,9 +63,14 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ConfigUtil configUtil = new ConfigUtil(this);
+        backendUrl = configUtil.getString("api_url", "");
+
         resultCard = findViewById(R.id.result);
         titel = findViewById(R.id.titel);
         artist = findViewById(R.id.artiest);
+        apiEditTextLayout = findViewById(R.id.api_url_layout);
+        apiEditText = apiEditTextLayout.getEditText();
 
         resultCard.setVisibility(View.INVISIBLE);
 
@@ -79,6 +91,28 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                 }
             }
         });
+
+        apiEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = charSequence.toString();
+                if (!input.startsWith("http://") && !input.startsWith("https://"))
+                    input = "http://" + input;
+                configUtil.setString("api_url", input);
+                backendUrl = input;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        apiEditText.setText(backendUrl);
 
 
         dynamicSineWaveView = findViewById(R.id.sine_view);
