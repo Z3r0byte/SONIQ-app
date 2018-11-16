@@ -86,6 +86,13 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                 if (recorderInitialized) {
                     startListening();
                 } else {
+                    dynamicSineWaveView.setVisibility(View.INVISIBLE);
+                    listenButton.revertAnimation(new OnAnimationEndListener() {
+                        @Override
+                        public void onAnimationEnd() {
+                            dynamicSineWaveView.stopAnimation();
+                        }
+                    });
                     Log.e(TAG, "onClick: Error while initializing AudioRecorder");
                     Toast.makeText(MainActivity.this, R.string.fout_initialiseren_microfoon, Toast.LENGTH_SHORT).show();
                 }
