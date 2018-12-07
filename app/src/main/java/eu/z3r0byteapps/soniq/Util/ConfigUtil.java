@@ -4,10 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class ConfigUtil {
+    /*
+    Deze class kan gebruikt worden om waardes op te halen uit de SharedPreferences en deze op te slaan
+    Eerst dient een instance van deze class aangemaakt te worden voor deze gebruikt kan worden, daarna
+        kan via verschillende get en set methodes een variabele opgehaald of opgeslagen worden
+     */
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    //Nieuwe instance aanmaken met een application context
     public ConfigUtil(Context context) {
         sharedPreferences = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
