@@ -3,6 +3,7 @@ package eu.z3r0byteapps.soniq.Containers;
 import com.google.gson.annotations.SerializedName;
 
 public class Search {
+    //@SerializedName vertelt de JSON library wat de naam in de JSON string is van de onderstaande variabele
     @SerializedName("search_id")
     private String searchId;
     private SearchResult searchResult;
