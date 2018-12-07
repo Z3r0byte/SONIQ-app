@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                 }
 
                 audioRecord.startRecording();
-                int readSize = 88200;
-                for (int i = 0; i < 5; i++) {
+                int readSize = 44100;
+                for (int i = 0; i < 10; i++) {
                     recordedAudio = new short[readSize];
                     if (resultFound) break;
                     audioRecord.read(recordedAudio, 0, readSize);
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements RuntimePermission
                 } catch (IOException | IllegalStateException e) {
                     e.printStackTrace();
                 } finally {
-                    if ((requestsSubmitted == 5 && requestsFinished == 4)) {
+                    if ((requestsSubmitted == 10 && requestsFinished == 9)) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
